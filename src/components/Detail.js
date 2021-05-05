@@ -57,6 +57,7 @@ const ImageTitle = styled.div`
   min-height: 170px;
   width: 35vw;
   min-width: 200px;
+  margin-top: 60px;
   img {
     width: 100%;
     height: 100%;
@@ -112,7 +113,7 @@ const GroupWatchButton = styled(AddButton)`
   background: rgb(0, 0, 0);
 `;
 
-const Subtitle = styled.div`
+const SubTitle = styled.div`
   color: rgb(249, 249, 249);
   font-size: 15px;
   min-height: 20px;
@@ -124,4 +125,5 @@ const Description = styled.div`
   font-size: 20px;
   margin-top: 16px;
   color: rgb(249, 249, 249);
+  max-width: 760px;
 `;
