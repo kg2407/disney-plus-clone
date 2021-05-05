@@ -1,12 +1,33 @@
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+import db from "../firebase";
+import { useParams } from "react-router";
 
 function Detail() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState({});
+
+  useEffect(() => {
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          console.log(doc.data());
+          setMovie(doc.data());
+        } else {
+          console.log("No such movie is found");
+        }
+      });
+  }, []);
   return (
     <Container>
       <Background>
-        <img src="/images/bao-background.jpg" />
+        <img src={movie.backgroundImg} />
       </Background>
-      <ImageTitle></ImageTitle>
+      <ImageTitle>
+        <img src={movie.titleImg} />
+      </ImageTitle>
       <Controls>
         <PlayButton>
           <img src="/images/play-icon-black.png" />
@@ -23,8 +44,8 @@ function Detail() {
           <img src="/images/group-icon.png" />
         </GroupWatchButton>
       </Controls>
-      <SubTitle>2018-7m-Family, Fantasy, Kids, Animation</SubTitle>
-      <Description>Any Description</Description>
+      <SubTitle>{movie.subTitle}</SubTitle>
+      <Description>{movie.description}</Description>
     </Container>
   );
 }
